@@ -15,8 +15,8 @@ export class WalletController {
     }
 
     @Get(':id')
-    getWallet(@Param() user: User, ) {
-
+    getWallet(@Param() id: number ) {
+        this.walletService.findPostById(id);
     }
 
     @Put(':id')
