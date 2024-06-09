@@ -8,7 +8,7 @@ import {
   
   import { UserEntity } from 'src/users/models/user.entity';
   
-@Entity('wallet')
+@Entity('WalletAddress')
 export class WalletEntity {
     @PrimaryGeneratedColumn()
     id: number;

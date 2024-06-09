@@ -10,7 +10,7 @@ import { WalletModule } from './wallet/wallet.module';
   imports: [  
     //Allows for Postgres variables to be made available to Services
     ConfigModule.forRoot({ isGlobal: true }), UsersModule, WalletModule,
-    /*TypeOrmModule.forRoot({
+    TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.POSTGRES_HOST,
       port: parseInt(<string>process.env.POSTGRES_PORT),
@@ -19,7 +19,14 @@ import { WalletModule } from './wallet/wallet.module';
       database: process.env.POSTGRES_DATABASE,
       autoLoadEntities: true,
       synchronize: true, // shouldn't be used in production - may lose data
-    })*/
+      logging: process.env.DB_LOGGING === 'true',
+      entities: [__dirname + '/../**/*.entity.{js,ts}'],
+      migrations: [__dirname + '/../migration/**/*.{js,ts}'],
+      subscribers: [__dirname + '/../subscriber/**/*.{js,ts}'],
+      extra: {
+        ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
+      }
+    })
   ],
   controllers: [AppController],
   providers: [AppService],
