@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { WalletModule } from './wallet/wallet.module';
+import { join } from 'path';
 
 @Module({
   imports: [  
@@ -20,7 +21,7 @@ import { WalletModule } from './wallet/wallet.module';
       autoLoadEntities: true,
       synchronize: true, // shouldn't be used in production - may lose data
       logging: process.env.DB_LOGGING === 'true',
-      entities: [__dirname + '/../**/*.entity.{js,ts}'],
+      entities: [join(__dirname, '**', '*.entity.{ts,js}')],
       migrations: [__dirname + '/../migration/**/*.{js,ts}'],
       subscribers: [__dirname + '/../subscriber/**/*.{js,ts}'],
       extra: {
